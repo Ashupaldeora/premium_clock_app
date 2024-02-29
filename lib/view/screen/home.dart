@@ -227,7 +227,7 @@ class _homescreenState extends State<homescreen> {
                                     RotatedBox(
                                       quarterTurns: 3,
                                       child: Text(
-                                        (time.hour >= 23) ? "   PM" : "   AM",
+                                        (time.hour >= 23) ? "   PM" : "    AM",
                                         style: GoogleFonts.lato(
                                             color: Colors.grey.shade600,
                                             fontWeight: FontWeight.w500,

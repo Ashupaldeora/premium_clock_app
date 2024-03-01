@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:premium_clock_app/utils/times.dart';
+import 'package:premium_clock_app/view/screen/stopwatch.dart';
 
 class homescreen extends StatefulWidget {
   const homescreen({super.key});
@@ -17,18 +19,18 @@ class _homescreenState extends State<homescreen> {
   Widget build(BuildContext context) {
     DateTime time = DateTime.now();
 
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         time = DateTime.now();
       });
     });
 
     return Padding(
-      padding: EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10),
       child: Scaffold(
-          backgroundColor: Color(0xff120F14),
+          backgroundColor: const Color(0xff120F14),
           appBar: AppBar(
-            backgroundColor: Color(0xff120F14),
+            backgroundColor: const Color(0xff120F14),
             leading: IconButton(
                 onPressed: () {},
                 icon: SvgPicture.asset(
@@ -44,8 +46,8 @@ class _homescreenState extends State<homescreen> {
                   width: 30,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Color(0xffFC9AA2)),
-                  child: Icon(
+                      color: const Color(0xffFC9AA2)),
+                  child: const Icon(
                     Icons.add,
                     color: Colors.white,
                   ),
@@ -77,7 +79,7 @@ class _homescreenState extends State<homescreen> {
                           fontWeight: FontWeight.w500,
                           fontSize: 60),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Transform.rotate(
@@ -103,7 +105,7 @@ class _homescreenState extends State<homescreen> {
                             height: 350,
                             width: 300,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Color(0xff222126),
                               shape: BoxShape.circle,
                             ),
@@ -112,7 +114,7 @@ class _homescreenState extends State<homescreen> {
                         Center(
                           child: Transform.rotate(
                             angle: time.second * 6 * pi / 180,
-                            child: VerticalDivider(
+                            child: const VerticalDivider(
                               color: Color(0xffFC9AA2),
                               thickness: 1.5,
                               indent: 60,
@@ -123,7 +125,7 @@ class _homescreenState extends State<homescreen> {
                         Center(
                           child: Transform.rotate(
                             angle: time.minute * 6 * pi / 180,
-                            child: VerticalDivider(
+                            child: const VerticalDivider(
                               color: Color(0xff4E4E4E),
                               thickness: 10,
                               indent: 65,
@@ -135,7 +137,7 @@ class _homescreenState extends State<homescreen> {
                           child: Transform.rotate(
                             angle:
                                 (time.hour * 30 + time.minute * 0.5) * pi / 180,
-                            child: VerticalDivider(
+                            child: const VerticalDivider(
                               color: Color(0xff404040),
                               thickness: 10,
                               indent: 85,
@@ -148,14 +150,14 @@ class _homescreenState extends State<homescreen> {
                             height: 30,
                             width: 30,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xff3A3A3A),
                             ),
                             child: Container(
                               height: 10,
                               width: 10,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color(0xff222222),
                               ),
@@ -166,20 +168,20 @@ class _homescreenState extends State<homescreen> {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           height: 180,
                           width: 250,
                           decoration: BoxDecoration(
-                              color: Color(0xff222126),
+                              color: const Color(0xff222126),
                               borderRadius: BorderRadius.circular(15)),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +193,7 @@ class _homescreenState extends State<homescreen> {
                                     fontSize: 17,
                                     letterSpacing: 1),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Text(
@@ -202,7 +204,7 @@ class _homescreenState extends State<homescreen> {
                                     fontSize: 15,
                                     letterSpacing: 1),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Container(
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -211,7 +213,7 @@ class _homescreenState extends State<homescreen> {
                                       'assets/icon/Liberty.svg',
                                       color: Colors.grey.shade800,
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Text(
                                       (time.minute < 10)
                                           ? "${(time.hour - 10) % 12} : 0${time.minute}"
@@ -221,7 +223,7 @@ class _homescreenState extends State<homescreen> {
                                           fontWeight: FontWeight.w500,
                                           fontSize: 30),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     RotatedBox(
@@ -240,15 +242,15 @@ class _homescreenState extends State<homescreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           height: 180,
                           width: 250,
                           decoration: BoxDecoration(
-                              color: Color(0xff222126),
+                              color: const Color(0xff222126),
                               borderRadius: BorderRadius.circular(15)),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,7 +262,7 @@ class _homescreenState extends State<homescreen> {
                                     fontSize: 17,
                                     letterSpacing: 1),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Text(
@@ -271,14 +273,14 @@ class _homescreenState extends State<homescreen> {
                                     fontSize: 15,
                                     letterSpacing: 1),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Row(
                                 children: [
                                   SvgPicture.asset(
                                     'assets/icon/Sydney.svg',
                                     color: Colors.grey.shade800,
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Text(
                                     (time.minute < 10)
                                         ? "${(time.hour + 6) % 12} : 0${time.minute}"
@@ -288,7 +290,7 @@ class _homescreenState extends State<homescreen> {
                                         fontWeight: FontWeight.w500,
                                         fontSize: 30),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
                                   RotatedBox(
@@ -310,7 +312,7 @@ class _homescreenState extends State<homescreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 // Container(
@@ -333,6 +335,9 @@ class _homescreenState extends State<homescreen> {
                     onTap: () {
                       setState(() {
                         click = index;
+                        (click == 2)
+                            ? Navigator.of(context).pushNamed('/stopwatch')
+                            : null;
                       });
                     },
                     child: (click == index)
@@ -341,11 +346,11 @@ class _homescreenState extends State<homescreen> {
                             width: 120,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                                color: Color(0xff29282D),
+                                color: const Color(0xff29282D),
                                 borderRadius: BorderRadius.circular(50)),
                             child: SvgPicture.asset(
                               icons[index],
-                              color: Color(0xffFC9AA2),
+                              color: const Color(0xffFC9AA2),
                             ),
                           )
                         : Container(

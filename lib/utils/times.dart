@@ -1,1 +1,1 @@
-int seconds = 0;
+

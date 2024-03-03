@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:reliable_interval_timer/reliable_interval_timer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,15 +17,47 @@ class stopwatch extends StatefulWidget {
 }
 
 class _stopwatchState extends State<stopwatch> {
+  bool isRunning = false;
+  late Timer _timer;
+  late Stopwatch _stopwatch;
+  @override
+  void initState() {
+    super.initState();
+    _stopwatch = Stopwatch();
+    _timer = new Timer.periodic(new Duration(milliseconds: 30), (timer) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void StartStop() {
+    if (_stopwatch.isRunning) {
+      _stopwatch.stop();
+    } else {
+      _stopwatch.start();
+    }
+    setState(() {}); // re-render the page
+  }
+
+  // void start() {
+  //   timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  //     if (second > 58) {
+  //       minute++;
+  //       second = 0;
+  //     } else {
+  //       second++;
+  //     }
+  //     setState(() {});
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
-    int hour = 0, minute = 0, second = 0, milisecond = 0;
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        second++;
-      });
-    });
-
     return Scaffold(
         backgroundColor: const Color(0xff120F14),
         appBar: AppBar(
@@ -57,15 +91,58 @@ class _stopwatchState extends State<stopwatch> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "${hour} : ${minute} : ${second}",
+                formatTime(_stopwatch.elapsedMilliseconds),
                 style:
                     GoogleFonts.lato(color: Colors.grey.shade500, fontSize: 50),
               ),
-              Text(
-                "${milisecond}",
-                style:
-                    GoogleFonts.lato(color: Colors.grey.shade500, fontSize: 45),
+              // SizedBox(
+              //   height: 5,
+              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 90),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      formatmili(_stopwatch.elapsedMilliseconds),
+                      style: GoogleFonts.lato(
+                          color: Color((0xffFC9AA2)), fontSize: 40),
+                    ),
+                  ],
+                ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.amber)),
+                      onPressed: () {
+                        // start();
+                        _stopwatch.start();
+                      },
+                      child: Text("click")),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        // timer.cancel();
+                        _stopwatch.stop();
+                      },
+                      child: Text("stop"))
+                ],
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    // timer.cancel();
+                    _stopwatch.reset();
+                    _stopwatch.stop();
+                  },
+                  child: Text(
+                    "Reset",
+                  ))
             ],
           ),
         ),
@@ -81,6 +158,9 @@ class _stopwatchState extends State<stopwatch> {
                   onTap: () {
                     setState(() {
                       click = index;
+                      (index == 0)
+                          ? Navigator.of(context).pushNamed('/home')
+                          : null;
                     });
                   },
                   child: (click == index)
@@ -110,4 +190,20 @@ class _stopwatchState extends State<stopwatch> {
           ),
         ));
   }
+}
+
+int startclick = 0;
+String formatTime(int milliseconds) {
+  // var mili = (milliseconds % 1000).toString().padLeft(3, '0');
+
+  var secs = milliseconds ~/ 1000;
+  var hours = (secs ~/ 3600).toString().padLeft(2, '0');
+  var minutes = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
+  var seconds = (secs % 60).toString().padLeft(2, '0');
+  return "$hours:$minutes:$seconds";
+}
+
+String formatmili(int milliseconds) {
+  var milli = (milliseconds % 1000).toString().padLeft(3, '0');
+  return milli;
 }

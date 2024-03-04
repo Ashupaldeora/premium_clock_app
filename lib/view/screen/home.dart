@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:premium_clock_app/utils/times.dart';
 import 'package:premium_clock_app/view/screen/stopwatch.dart';
+import 'package:premium_clock_app/view/screen/timer.dart';
 
 class homescreen extends StatefulWidget {
   const homescreen({super.key});
@@ -36,7 +37,7 @@ class _homescreenState extends State<homescreen> {
                 icon: SvgPicture.asset(
                   'assets/icon/list.svg',
                   color: Colors.grey.shade700,
-                  height: 30,
+                  height: 27,
                 )),
             actions: [
               Padding(
@@ -335,9 +336,24 @@ class _homescreenState extends State<homescreen> {
                     onTap: () {
                       setState(() {
                         click = index;
-                        (click == 2)
-                            ? Navigator.of(context).pushNamed('/stopwatch')
-                            : null;
+                        switch (click) {
+                          case 2:
+                            Navigator.of(context).push(PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) {
+                                  return stopwatch();
+                                },
+                                transitionDuration: Duration.zero));
+                            break;
+                          case 3:
+                            Navigator.of(context).push(PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) {
+                                  return timerwatch();
+                                },
+                                transitionDuration: Duration.zero));
+                            break;
+                        }
                       });
                     },
                     child: (click == index)
@@ -374,6 +390,7 @@ List icons = [
   'assets/icon/clock.svg',
   'assets/icon/world.svg',
   'assets/icon/stop_watch.svg',
-  'assets/icon/watch_2.svg'
+  'assets/icon/watch_2.svg',
 ];
+
 int click = 0;

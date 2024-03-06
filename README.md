@@ -6,11 +6,15 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+<p>
+  <img src="https://github.com/Ashupaldeora/premium_clock_app/assets/143180848/be06acee-16d4-4b98-9955-29b6418d4eb1" height = "400px"  hspace="20px" >
+     <img src="https://github.com/Ashupaldeora/premium_clock_app/assets/143180848/e0f689aa-d4ad-4001-b553-e12a7a050474" height = "400px"  hspace="20px" >
+     <img src="https://github.com/Ashupaldeora/premium_clock_app/assets/143180848/758a6aae-3be4-4c64-a2e3-ca55cca60d8b" height = "400px"  hspace="20px" >
+</p>
+<video src="https://github.com/Ashupaldeora/premium_clock_app/assets/143180848/e3b2b866-a87f-4192-a622-18d6d8de7146">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+

@@ -77,7 +77,7 @@ class _timerwatchState extends State<timerwatch> {
                             height: 350,
                             width: 350,
                             child: CircularProgressIndicator(
-                              value: 1,
+                              value: Timersec / tempint,
                               strokeWidth: 8,
                               strokeCap: StrokeCap.round,
                               color: const Color(0xffFC9AA2),
@@ -106,12 +106,11 @@ class _timerwatchState extends State<timerwatch> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  Timerhour = 0;
-                                  Timerminute = 0;
-                                  Timersec = 0;
-                                  timerr.cancel();
                                   setState(() {
+                                    Timersec = 0;
+                                    timerr.cancel();
                                     isPlayed = false;
+                                    Timerclick = 0;
                                   });
                                 });
                               },
@@ -124,17 +123,13 @@ class _timerwatchState extends State<timerwatch> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  if (Timersec != 0 ||
-                                      Timerminute != 0 ||
-                                      Timerhour != 0) {
+                                  if (Timersec != 0) {
                                     Timerclick++;
-                                    if (Timerclick % 2 == 1) {
+                                    if (Timerclick == 1) {
                                       isPlayed = true;
-                                    } else {
-                                      isPlayed = false;
+                                      starttimer();
                                     }
                                   }
-                                  (isPlayed) ? starttimer() : timerr.cancel();
                                 });
                               },
                               icon: (!isPlayed)
@@ -151,9 +146,10 @@ class _timerwatchState extends State<timerwatch> {
                             ),
                             IconButton(
                               onPressed: () {
-                                timerr.cancel();
                                 setState(() {
+                                  timerr.cancel();
                                   isPlayed = false;
+                                  Timerclick = 0;
                                 });
                               },
                               icon: const Icon(
@@ -234,6 +230,7 @@ class _timerwatchState extends State<timerwatch> {
                                                 onPressed: () {
                                                   setState(() {
                                                     Timersec = 60;
+                                                    tempint = 60;
                                                   });
                                                 },
                                                 child: Text(
@@ -249,6 +246,7 @@ class _timerwatchState extends State<timerwatch> {
                                                 onPressed: () {
                                                   setState(() {
                                                     Timersec = 60 * 3;
+                                                    tempint = 3 * 60;
                                                   });
                                                 },
                                                 child: Text(
@@ -273,6 +271,7 @@ class _timerwatchState extends State<timerwatch> {
                                                 onPressed: () {
                                                   setState(() {
                                                     Timersec = 60 * 5;
+                                                    tempint = 5 * 60;
                                                   });
                                                 },
                                                 child: Text(
@@ -286,7 +285,10 @@ class _timerwatchState extends State<timerwatch> {
                                                 )),
                                             OutlinedButton(
                                                 onPressed: () {
-                                                  Timersec = 60 * 10;
+                                                  setState(() {
+                                                    Timersec = 60 * 10;
+                                                    tempint = 10 * 60;
+                                                  });
                                                 },
                                                 child: Text(
                                                   "10 Minute",
@@ -377,14 +379,15 @@ class _timerwatchState extends State<timerwatch> {
   }
 }
 
-int Timerhour = 0, Timerminute = 0, Timersec = 0;
+String? Timerhour, Timerminute;
+int Timersec = 0, tempint = 1;
 String formatTimer(int Tseconds) {
   // var mili = (milliseconds % 1000).toString().padLeft(3, '0');
 
   var secs = Tseconds;
-  var hours = (secs ~/ 3600).toString().padLeft(2, '0');
-  var minutes = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
+  Timerhour = (secs ~/ 3600).toString().padLeft(2, '0');
+  Timerminute = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
   var seconds = (secs % 60).toString().padLeft(2, '0');
 
-  return "$hours:$minutes:$seconds";
+  return "$Timerhour:$Timerminute:$seconds";
 }
